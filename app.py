@@ -28,14 +28,15 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 
 # Model saved with Keras model.save()
-MODEL_JSON = './model/carbrand_cnn.json'
-MODEL_WEIGHTS = './model/carbrand_cnn.h5'
+basepath = os.path.dirname(__file__)
+MODEL_JSON = os.path.join(basepath,'model', 'carbrand_cnn.json')
+MODEL_WEIGHTS = os.path.join(basepath,'model', 'carbrand_cnn.h5')
 # Load your trained model
-json_file = open('./model/carbrand_cnn.json', 'r')
+json_file = open(MODEL_JSON, 'r')
 loaded_model_json = json_file.read()
 json_file.close()
 model = model_from_json(loaded_model_json)
-model.load_weights('./model/carbrand_cnn.h5')
+model.load_weights(MODEL_WEIGHTS)
 
 
 
